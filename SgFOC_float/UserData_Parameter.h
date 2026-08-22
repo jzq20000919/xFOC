@@ -6,8 +6,8 @@
 static inline void User_ParameterSet(void)
 {
     /* 电流反馈滤波 */
-    Sguan.bpf.CurrentD.Wc = 31415.96f;
-    Sguan.bpf.CurrentQ.Wc = 31415.96f;
+    Sguan.bpf.CurrentD.Wc = 12566.37f;
+    Sguan.bpf.CurrentQ.Wc = 12566.37f;
     Sguan.bpf.Encoder.Wc  = 300.0f;
 /* Id 电流环 */
     Sguan.control.Current_D.Wc = 100.0f;
