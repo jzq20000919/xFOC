@@ -54,3 +54,5 @@ xfoc\main.o: ../SgFOC_float/UserData_Status.h
 xfoc\main.o: ../SgFOC_float/Sguan_PID.h
 xfoc\main.o: ../SgFOC_float/Sguan_PLL.h
 xfoc\main.o: ../SgFOC_float/Sguan_printf.h
+xfoc\main.o: ../User/Key.h
+xfoc\main.o: ../User/vofa.h

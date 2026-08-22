@@ -3,10 +3,14 @@
 
 #include "main.h"
 
-/* ³õÊ¼»¯ */
+extern volatile uint32_t g_vofa_tx_complete_count;
+extern volatile uint32_t g_vofa_tx_error_count;
+extern volatile uint32_t g_vofa_last_uart_error;
+
+/* åˆå§‹åŒ– */
 void VOFA_Init(void);
 
-/* ÖÜÆÚÈÎÎñ£¬ÔÚwhile(1)µ÷ÓÃ */
+/* å‘¨æœŸä»»åŠ¡ï¼Œåœ¨while(1)è°ƒç”¨ */
 void VOFA_Task(void);
 
 #endif

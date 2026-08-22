@@ -16,6 +16,9 @@ typedef struct{
     float I_num[2]; // (中间量)积分传递函数分子系数
     float D_num[2]; // (中间量)微分传递函数分子系数
     float D_den[2]; // (中间量)微分传递函数分母系数
+
+    /* Each controller needs an independent anti-windup state. */
+    uint8_t IntegralFrozen;
 }RUN_STRUCT;
 
 typedef struct{

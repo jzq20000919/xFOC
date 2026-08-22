@@ -9,12 +9,29 @@
 /* 用户自己的CODE END Includes */
 static inline void User_UserControl(void)
 {
+    const float rpm_to_rads = 0.104719755f;
+    const float max_speed_step =
+        MOTOR_ACCEL_RPM_PER_SECOND * rpm_to_rads * Sguan.PMSM_RUN_T;
+
     Sguan.foc.Target_Id = 0.0f;
 
     if (g_motor_run)
     {
-        Sguan.foc.Target_Speed =
-            g_target_speed_rad;
+        const float speed_error =
+            g_target_speed_rad - Sguan.foc.Target_Speed;
+
+        if (speed_error > max_speed_step)
+        {
+            Sguan.foc.Target_Speed += max_speed_step;
+        }
+        else if (speed_error < -max_speed_step)
+        {
+            Sguan.foc.Target_Speed -= max_speed_step;
+        }
+        else
+        {
+            Sguan.foc.Target_Speed = g_target_speed_rad;
+        }
     }
     else
     {

@@ -22,6 +22,7 @@
 
 // 电机控制核心结构体设计
 SguanFOC_System_STRUCT Sguan = {0};
+static volatile uint8_t Sguan_initialized = 0U;
 
 /**
  * @description: 1.Transfer传递函数的离散化运算，采用双线性变换
@@ -930,6 +931,7 @@ static void Sguan_Start_Tick(void){
         // 暂时还未书写
         //正常工作中(状态机运行)
         Sguan.status = MOTOR_STATUS_IDLE;
+        Sguan_initialized = 1U;
     }
 }
 
@@ -1064,3 +1066,61 @@ void SguanFOC_main_Loop(void){
     #endif // Printf_Debug
 }
 
+/*
+ * Application-level motor output control.
+ *
+ * The first start request enters the existing calibration sequence. Later
+ * stop/start operations retain the calibrated encoder offset, but reset all
+ * controller history and gate the TIM1 bridge outputs through MOE.
+ */
+void SguanFOC_SetRun(uint8_t run){
+    uint32_t primask = __get_PRIMASK();
+
+    __disable_irq();
+
+    if (run){
+        if (!Sguan_initialized){
+            Sguan.status = MOTOR_STATUS_UNINITIALIZED;
+        }
+        else{
+            Sguan.foc.Target_Id = 0.0f;
+            Sguan.foc.Target_Iq = 0.0f;
+            Sguan.foc.Target_Speed = 0.0f;
+            Sguan.foc.Ud_in = 0.0f;
+            Sguan.foc.Uq_in = 0.0f;
+
+            Sguan_Control_Init(&Sguan);
+            SVPWM_Tick(&Sguan,
+                       Sguan.foc.sine,
+                       Sguan.foc.cosine,
+                       0.0f,
+                       0.0f);
+
+            Sguan.status = MOTOR_STATUS_IDLE;
+            __HAL_TIM_MOE_ENABLE(&htim1);
+        }
+    }
+    else{
+        Sguan.status = MOTOR_STATUS_STANDBY;
+        Sguan.foc.Target_Id = 0.0f;
+        Sguan.foc.Target_Iq = 0.0f;
+        Sguan.foc.Target_Speed = 0.0f;
+        Sguan.foc.Target_Pos = 0.0f;
+        Sguan.foc.Ud_in = 0.0f;
+        Sguan.foc.Uq_in = 0.0f;
+
+        if (Sguan_initialized){
+            Sguan_Control_Init(&Sguan);
+            SVPWM_Tick(&Sguan,
+                       Sguan.foc.sine,
+                       Sguan.foc.cosine,
+                       0.0f,
+                       0.0f);
+            __HAL_TIM_MOE_DISABLE_UNCONDITIONALLY(&htim1);
+        }
+    }
+
+    if (!primask){
+        __enable_irq();
+    }
+}

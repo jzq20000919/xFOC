@@ -1,5 +1,5 @@
 xfoc\vofa.o: ..\User\vofa.c
-xfoc\vofa.o: ..\User\Vofa.h
+xfoc\vofa.o: ..\User\vofa.h
 xfoc\vofa.o: ../Core/Inc/main.h
 xfoc\vofa.o: ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h
 xfoc\vofa.o: ../Core/Inc/stm32g4xx_hal_conf.h

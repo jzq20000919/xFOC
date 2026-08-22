@@ -28,6 +28,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "SguanFOC.h"
+#include "Key.h"
+#include "vofa.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -102,9 +104,11 @@ int main(void)
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-   VOFA_Init();
- Key_ControlInit();
- Sguan.status = MOTOR_STATUS_UNINITIALIZED;
+  VOFA_Init();
+  Key_ControlInit();
+
+  /* Power-up is always safe: wait for the start key before motor calibration. */
+  Sguan.status = MOTOR_STATUS_STANDBY;
 
   /* USER CODE END 2 */
 
@@ -112,9 +116,18 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-        SguanFOC_main_Loop();
-           VOFA_Task();
-        Key_Task();
+    static uint8_t last_run_request = 0U;
+
+    Key_Task();
+
+    if (g_motor_run != last_run_request)
+    {
+      SguanFOC_SetRun(g_motor_run);
+      last_run_request = g_motor_run;
+    }
+
+    SguanFOC_main_Loop();
+    VOFA_Task();
 
     /* USER CODE END WHILE */
 
