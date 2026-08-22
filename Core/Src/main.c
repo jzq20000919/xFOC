@@ -109,44 +109,16 @@ int main(void)
 
   /* Power-up is always safe: wait for the start key before motor calibration. */
 Sguan.status = MOTOR_STATUS_STANDBY;  
-/* USER CODE END 2 */
+  /* USER CODE END 2 */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-while (1)
-{
-    static uint8_t last_motor_run = 0U;
+  while (1)
+  {
+    /* USER CODE END WHILE */
 
-    /* 读取按键 */
-    Key_Task();
-
-
-    /*
-     * KEY1产生 0 -> 1 上升沿
-     *
-     * 并且电机还处于未初始化STANDBY状态时，
-     * 只启动一次Sguan初始化。
-     */
-    if ((g_motor_run == 1U) &&
-        (last_motor_run == 0U) &&
-        (Sguan.status == MOTOR_STATUS_STANDBY))
-    {
-        Sguan.status = MOTOR_STATUS_UNINITIALIZED;
-    }
-
-
-    /*
-     * 保存当前KEY1运行状态
-     */
-    last_motor_run = g_motor_run;
-
-
-    /* SguanFOC */
-    SguanFOC_main_Loop();
-
-
-    /* VOFA */
-    VOFA_Task();
-}
+    /* USER CODE BEGIN 3 */
+  }
   /* USER CODE END 3 */
 }
 
