@@ -1,0 +1,78 @@
+# ============================================================
+# xFOC - STM32CubeMX + Keil MDK-ARM
+# ============================================================
+
+
+# ------------------------------------------------------------
+# Keil MDK build output directories
+# ------------------------------------------------------------
+MDK-ARM/xFOC/
+MDK-ARM/Objects/
+MDK-ARM/Listings/
+
+# Keil generated debug/runtime files
+MDK-ARM/DebugConfig/
+MDK-ARM/EventRecorderStub.scvd
+
+# Keil user-specific GUI settings
+*.uvguix.*
+*.uvgui.*
+
+# Keil / ARM compiler generated files
+*.axf
+*.hex
+*.bin
+*.elf
+*.map
+*.lst
+*.o
+*.obj
+*.d
+*.dep
+*.crf
+*.lnp
+*.tra
+*.iex
+*.fed
+
+# Build reports
+*.build_log.htm
+*.htm
+
+
+# ------------------------------------------------------------
+# Temporary files
+# ------------------------------------------------------------
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.old
+*~
+*.swp
+
+
+# ------------------------------------------------------------
+# CMake / VSCode build directories
+# Keep this for future use if the project is built with CMake.
+# ------------------------------------------------------------
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
+
+
+# ------------------------------------------------------------
+# OS generated files
+# ------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+
+# ------------------------------------------------------------
+# Logs
+# ------------------------------------------------------------
+*.log

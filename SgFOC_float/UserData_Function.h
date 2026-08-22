@@ -114,5 +114,14 @@ static inline float User_Temperature_DataGet(void){
     return -9999.0f;
 }
 
+static inline void User_PWM_OutputDisable(void)
+{
+    __HAL_TIM_MOE_DISABLE_UNCONDITIONALLY(&htim1);
+}
+
+static inline void User_PWM_OutputEnable(void)
+{
+    __HAL_TIM_MOE_ENABLE(&htim1);
+}
 
 #endif // USERDATA_FUNCTION_H

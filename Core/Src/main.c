@@ -114,26 +114,37 @@ Sguan.status = MOTOR_STATUS_STANDBY;
   /* USER CODE BEGIN WHILE */
 while (1)
 {
-    /* 1. 扫描按键 */
+    static uint8_t last_motor_run = 0U;
+
+    /* 读取按键 */
     Key_Task();
 
+
     /*
-     * 2. 第一次按KEY1：
-     *    STANDBY -> UNINITIALIZED
+     * KEY1产生 0 -> 1 上升沿
      *
-     * SguanFOC会自动完成：
-     * 硬件启动 -> 电流校准 -> 转子对齐 -> IDLE
+     * 并且电机还处于未初始化STANDBY状态时，
+     * 只启动一次Sguan初始化。
      */
-    if ((g_motor_run != 0U) &&
+    if ((g_motor_run == 1U) &&
+        (last_motor_run == 0U) &&
         (Sguan.status == MOTOR_STATUS_STANDBY))
     {
         Sguan.status = MOTOR_STATUS_UNINITIALIZED;
     }
 
-    /* 3. Sguan主任务 */
+
+    /*
+     * 保存当前KEY1运行状态
+     */
+    last_motor_run = g_motor_run;
+
+
+    /* SguanFOC */
     SguanFOC_main_Loop();
 
-    /* 4. VOFA */
+
+    /* VOFA */
     VOFA_Task();
 }
   /* USER CODE END 3 */
