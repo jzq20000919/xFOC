@@ -19,28 +19,6 @@
 static float Get_Data(void);
 uint8_t Sguan_PrintfBuff[200];
 
-/* ================= 重定向设计 BEGIN ================= */
-// 支持printf函数，而无需选择MicroLIB
-#if 1
-#pragma import(__use_no_semihosting)
-//标准库需要的支持函数
-struct __FILE{ 
-	int handle; 
-}; 
-// 支持printf函数，而不需要选择MicroLIB
-FILE __stdout;
-//定义_sys_exit避免使用半主机模式
-void _sys_exit(int x){ 
-	x = x; 
-} 
-#endif
-
-//串口重定向函数printf，不使用到MicroLIB
-int fputc(int ch,FILE *f){
-	User_CorrespondSet((uint8_t *)&ch,1);
-	return ch;
-}
-/* ================= 重定向设计 END ================= */
 
 
 // [接收]数据解析函数(格式：AO=13.14?)

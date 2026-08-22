@@ -45,11 +45,25 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
+    User/Key.c
+    User/vofa.c
+
+    SgFOC_float/SguanFOC.c
+    SgFOC_float/Sguan_FW.c
+    SgFOC_float/Sguan_Filter.c
+    SgFOC_float/Sguan_Ladrc.c
+    SgFOC_float/Sguan_math.c
+    SgFOC_float/Sguan_MotorStatus.c
+    SgFOC_float/Sguan_PID.c
+    SgFOC_float/Sguan_PLL.c
+    SgFOC_float/Sguan_printf.c
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+        User
+    SgFOC_float
 )
 
 # Add project symbols (macros)
