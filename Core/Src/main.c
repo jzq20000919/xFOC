@@ -108,14 +108,12 @@ int main(void)
   Key_ControlInit();
 
   /* Power-up is always safe: wait for the start key before motor calibration. */
-Sguan.status = MOTOR_STATUS_UNINITIALIZED;
-  /* USER CODE END 2 */
-
+Sguan.status = MOTOR_STATUS_STANDBY;  
+/* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    static uint8_t last_run_request = 0U;
 
     Key_Task();
     SguanFOC_main_Loop();
