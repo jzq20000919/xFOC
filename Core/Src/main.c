@@ -29,6 +29,7 @@
 /* USER CODE BEGIN Includes */
 #include "SguanFOC.h"
 #include "Key.h"
+#include "motor_run.h"
 #include "vofa.h"
 /* USER CODE END Includes */
 
@@ -106,30 +107,15 @@ int main(void)
   /* USER CODE BEGIN 2 */
   VOFA_Init();
   Key_ControlInit();
-
-  /* Power-up is always safe: wait for the start key before motor calibration. */
-Sguan.status = MOTOR_STATUS_STANDBY;  
+  MotorRun_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    static uint8_t last_motor_run = 0U;
     Key_Task();
-    /*
-     * 只在 KEY1 从停止 -> 运行的上升沿，
-     * 请求 SguanFOC 执行一次初始化。
-     *
-     * 防止状态机回到 STANDBY 后自动反复初始化。
-     */
-    if ((g_motor_run == 1U) &&
-        (last_motor_run == 0U) &&
-        (Sguan.status == MOTOR_STATUS_STANDBY))
-    {
-        Sguan.status = MOTOR_STATUS_UNINITIALIZED;
-    }
-    last_motor_run = g_motor_run;
+    MotorRun_Task();
     SguanFOC_main_Loop();
     VOFA_Task();
     /* USER CODE END WHILE */
@@ -195,8 +181,11 @@ void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
         __HAL_ADC_CLEAR_FLAG(&hadc2,
                              ADC_FLAG_JEOC | ADC_FLAG_JEOS);
 
-        /* ִ��һ��20kHz FOC���ٻ� */
-        SguanFOC_High_Loop();
+        /* Keep ADC triggering alive, but do not integrate FOC while stopped. */
+        if (MotorRun_FocEnabled())
+        {
+            SguanFOC_High_Loop();
+        }
     }
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)

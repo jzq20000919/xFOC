@@ -12,6 +12,7 @@
 
 extern volatile int32_t g_target_rpm;
 extern volatile float   g_target_speed_rad;
+/* User run request only; the actual run state is owned by motor_run.c. */
 extern volatile uint8_t g_motor_run;
 
 void Key_ControlInit(void);

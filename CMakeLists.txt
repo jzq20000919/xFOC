@@ -46,6 +46,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     User/Key.c
+    User/motor_run.c
     User/vofa.c
 
     SgFOC_float/SguanFOC.c

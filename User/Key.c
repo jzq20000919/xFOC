@@ -1,4 +1,5 @@
 #include "Key.h"
+#include "motor_run.h"
 
 #define RPM_TO_RADS              0.104719755f
 #define KEY_SCAN_PERIOD_MS       10U
@@ -14,8 +15,6 @@ typedef struct
 volatile int32_t g_target_rpm = MOTOR_START_RPM;
 volatile float g_target_speed_rad =
     (float)MOTOR_START_RPM * RPM_TO_RADS;
-volatile uint8_t g_motor_run = 0U;
-
 static void Key_SetTargetRPM(int32_t rpm)
 {
     if (rpm > MOTOR_RPM_MAX)
@@ -59,7 +58,6 @@ static uint8_t Key_PressedEvent(KeyDebounceState *state,
 
 void Key_ControlInit(void)
 {
-    g_motor_run = 0U;
     Key_SetTargetRPM(MOTOR_START_RPM);
 }
 
@@ -83,7 +81,7 @@ void Key_Task(void)
     if (Key_PressedEvent(&key1,
                          HAL_GPIO_ReadPin(KEY1_GPIO_Port, KEY1_Pin)))
     {
-        g_motor_run = (uint8_t)!g_motor_run;
+        MotorRun_RequestToggle();
     }
 
     if (Key_PressedEvent(&key2,
