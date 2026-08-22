@@ -116,9 +116,7 @@ Sguan.status = MOTOR_STATUS_STANDBY;
   while (1)
   {
     static uint8_t last_motor_run = 0U;
-
     Key_Task();
-
     /*
      * 只在 KEY1 从停止 -> 运行的上升沿，
      * 请求 SguanFOC 执行一次初始化。
@@ -131,15 +129,11 @@ Sguan.status = MOTOR_STATUS_STANDBY;
     {
         Sguan.status = MOTOR_STATUS_UNINITIALIZED;
     }
-
     last_motor_run = g_motor_run;
-
     SguanFOC_main_Loop();
-
     VOFA_Task();
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
-    
   }
   /* USER CODE END 3 */
 }

@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Release",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "--preset",
+                "Release"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Build + Flash Release",
+            "type": "shell",
+            "command": "STM32_Programmer_CLI",
+            "args": [
+                "-c",
+                "port=SWD",
+                "-w",
+                "${workspaceFolder}\\build\\Release\\xFOC.elf",
+                "-v",
+                "-rst"
+            ],
+            "dependsOn": "Build Release",
+            "dependsOrder": "sequence",
+            "problemMatcher": []
+        },
+        {
+            "label": "Reset MCU",
+            "type": "shell",
+            "command": "STM32_Programmer_CLI",
+            "args": [
+                "-c",
+                "port=SWD",
+                "-rst"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
