@@ -189,8 +189,7 @@ static void VOFA_SendFrame(void)
      *
      * 两者差值能帮助我们观察高速反电动势前馈。
      * ===================================================== */
-    data[7] =
-        Sguan.control.Current_Q.run.Output;
+    data[7] = (float)Sguan.status;
 
 
     /* =====================================================
