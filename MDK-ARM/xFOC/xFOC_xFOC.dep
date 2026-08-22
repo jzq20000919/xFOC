@@ -1326,14 +1326,14 @@ I (../Core/Inc/tim.h)(0x6A892D44)
 I (../Core/Inc/adc.h)(0x6A892D44)
 I (../Core/Inc/opamp.h)(0x6A892D44)
 I (..\SgFOC_float\UserData_Motor.h)(0x6A89746A)
-I (..\SgFOC_float\UserData_Parameter.h)(0x6A897E1E)
+I (..\SgFOC_float\UserData_Parameter.h)(0x6A899775)
 I (..\SgFOC_float\UserData_UserControl.h)(0x6A89815C)
 I (../User/Key.h)(0x6A897022)
 F (..\SgFOC_float\UserData_Calculate.h)(0x6A894117)()
 F (..\SgFOC_float\UserData_Correspond.h)(0x6A82845A)()
 F (..\SgFOC_float\UserData_Function.h)(0x6A898D55)()
 F (..\SgFOC_float\UserData_Motor.h)(0x6A89746A)()
-F (..\SgFOC_float\UserData_Parameter.h)(0x6A897E1E)()
+F (..\SgFOC_float\UserData_Parameter.h)(0x6A899775)()
 F (..\SgFOC_float\UserData_Status.h)(0x6A82845A)()
 F (..\SgFOC_float\UserData_UserControl.h)(0x6A89815C)()
 F (..\User\Key.c)(0x6A898147)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../SgFOC_float -I ../User-I.\RTE\_xFOC-IC:\Users\ZenQ\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\ZenQ\AppData\Local\Arm\Packs\Keil\STM32G4xx_DFP\1.6.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o xfoc\key.o --omf_browse xfoc\key.crf --depend xfoc\key.d)
@@ -1375,7 +1375,7 @@ I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h)(0x6A1150A6)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h)(0x6A1150A6)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h)(0x6A1150A6)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h)(0x6A1150A6)
-F (..\User\vofa.c)(0x6A89909A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../SgFOC_float -I ../User-I.\RTE\_xFOC-IC:\Users\ZenQ\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\ZenQ\AppData\Local\Arm\Packs\Keil\STM32G4xx_DFP\1.6.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o xfoc\vofa.o --omf_browse xfoc\vofa.crf --depend xfoc\vofa.d)
+F (..\User\vofa.c)(0x6A899620)(--c99 -c --cpu Cortex-M4.fp.sp -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc -I ../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I ../Drivers/CMSIS/Include -I ../SgFOC_float -I ../User-I.\RTE\_xFOC-IC:\Users\ZenQ\AppData\Local\Arm\Packs\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Users\ZenQ\AppData\Local\Arm\Packs\Keil\STM32G4xx_DFP\1.6.0\Drivers\CMSIS\Device\ST\STM32G4xx\Include-D__UVISION_VERSION="540" -DSTM32G431xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32G431xx-o xfoc\vofa.o --omf_browse xfoc\vofa.crf --depend xfoc\vofa.d)
 I (..\User\vofa.h)(0x6A897069)
 I (../Core/Inc/main.h)(0x6A896F4A)
 I (../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h)(0x6A1150A6)
