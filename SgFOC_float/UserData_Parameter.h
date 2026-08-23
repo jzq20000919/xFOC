@@ -32,8 +32,8 @@ static inline void User_ParameterSet(void)
     /* ================= 速度PI ================= */
 
     Sguan.control.Velocity.Wc = 100.0f;
-    Sguan.control.Velocity.Kp = 0.00400f;
-    Sguan.control.Velocity.Ki = 0.03600f;
+    Sguan.control.Velocity.Kp = 0.00668f;
+    Sguan.control.Velocity.Ki = 0.01630f;
     Sguan.control.Velocity.Kd = 0.0f;
 
     /* 速度环输出就是 Iq_ref，因此按照2A限幅 */

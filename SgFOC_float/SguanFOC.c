@@ -404,7 +404,7 @@ static void Control_VelCur_DOUBLE(SguanFOC_System_STRUCT *sguan){
 
 // Control高性能伺服三环(三闭环)
 static void Control_PosVelCur_THREE(SguanFOC_System_STRUCT *sguan){
-    static uint8_t Control_Count = 0;
+    static uint16_t Control_Count = 0;
     Control_Count++;
     // 0.(控制器数据赋值)如果不在工作状态，赋值为零
     if (sguan->status < 4){
