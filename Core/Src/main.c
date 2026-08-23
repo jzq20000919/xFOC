@@ -28,8 +28,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "SguanFOC.h"
-#include "Key.h"
-#include "motor_run.h"
+#include "motor_mgr.h"
+#include "comm_mgr_stm.h"
 #include "vofa.h"
 /* USER CODE END Includes */
 
@@ -106,17 +106,17 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   VOFA_Init();
-  Key_ControlInit();
-  MotorRun_Init();
+  MotorMgr_Init();
+  CommMgr_STM_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    Key_Task();
-    MotorRun_Task();
+    MotorMgr_Task();
     SguanFOC_main_Loop();
+    CommMgr_STM_Task();
     VOFA_Task();
     /* USER CODE END WHILE */
     /* USER CODE BEGIN 3 */
@@ -181,11 +181,8 @@ void HAL_ADCEx_InjectedConvCpltCallback(ADC_HandleTypeDef *hadc)
         __HAL_ADC_CLEAR_FLAG(&hadc2,
                              ADC_FLAG_JEOC | ADC_FLAG_JEOS);
 
-        /* Keep ADC triggering alive, but do not integrate FOC while stopped. */
-        if (MotorRun_FocEnabled())
-        {
-            SguanFOC_High_Loop();
-        }
+        /* MOE gates power output; measurements and the encoder PLL stay live. */
+        SguanFOC_High_Loop();
     }
 }
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)

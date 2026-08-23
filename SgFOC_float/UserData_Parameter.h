@@ -45,17 +45,17 @@ static inline void User_ParameterSet(void)
 
 #endif
 
-    /* 位置环暂时不用，保持原值即可 */
+    /* 50 Hz 位置外环：输出限幅为 +/-60 rpm，交给现有速度/电流串级环。 */
     Sguan.control.Position.Wc = 100.0f;
-    Sguan.control.Position.Kp = 8.0f;
+    Sguan.control.Position.Kp = 20.0f;
     Sguan.control.Position.Ki = 0.0f;
     Sguan.control.Position.Kd = 0.0f;
 
-    Sguan.control.Position.OutMax = 210.0f;
-    Sguan.control.Position.OutMin = -210.0f;
+    Sguan.control.Position.OutMax = 6.2831853f;
+    Sguan.control.Position.OutMin = -6.2831853f;
 
-    Sguan.control.Position.IntMax = 150.0f;
-    Sguan.control.Position.IntMin = -150.0f;
+    Sguan.control.Position.IntMax = 0.0f;
+    Sguan.control.Position.IntMin = 0.0f;
 
 
     /*

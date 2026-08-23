@@ -1,7 +1,6 @@
 #ifndef __USERDATA_USERCONTROL_H
 #define __USERDATA_USERCONTROL_H
 #include "SguanFOC.h"
-#include "Key.h"
 /* 电机控制User用户设置·实时参数控制页面 */
 
 /* 用户自己的CODE BEGIN Includes */
@@ -9,16 +8,8 @@
 /* 用户自己的CODE END Includes */
 static inline void User_UserControl(void)
 {
+    /* MotorMgr owns speed/position references; keep d-axis current at zero. */
     Sguan.foc.Target_Id = 0.0f;
-
-    if (g_motor_run)
-    {
-        Sguan.foc.Target_Speed = g_target_speed_rad;
-    }
-    else
-    {
-        Sguan.foc.Target_Speed = 0.0f;
-    }
 }
 static inline void User_AO_Adjust(float AO){
     /* Your code for Parameter set */
